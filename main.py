@@ -18,6 +18,13 @@ DEXSCREENER_V1 = "https://api.dexscreener.com"
 BINANCE      = "https://api.binance.com/api/v3"
 LIFI         = "https://li.quest/v1"
 
+@app.get("/", include_in_schema=False)
+@app.head("/", include_in_schema=False)
+async def root():
+    if os.path.exists("static/index.html"):
+        return HTMLResponse(open("static/index.html").read())
+    return HTMLResponse("<h1>zaCrypto API</h1>")
+
 CHAINS = {
     "ethereum": "eth", "bsc": "bsc", "polygon": "polygon_pos",
     "avalanche": "avax", "fantom": "ftm", "arbitrum": "arbitrum",
